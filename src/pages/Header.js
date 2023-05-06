@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-
+import { AiOutlineMenu } from 'react-icons/ai';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <nav className="bg-gradient-to-t from-gray-200 to-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/">
@@ -19,13 +19,13 @@ const Header = () => {
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <Link href="/">
-              <nav className="text-gray-800 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium">Produtos</nav>
+              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Produtos</nav>
             </Link>
-            <Link href="/about">
-              <nav className="text-gray-800 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium">Carrinho</nav>
+            <Link href="/About">
+              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Carrinho</nav>
             </Link>
             <Link href="/contact">
-              <nav className="text-gray-800 hover:text-gray-900 px-3 py-2 rounded-md text-v font-medium">Contato</nav>
+              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Contato</nav>
             </Link>
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
@@ -33,7 +33,8 @@ const Header = () => {
               type="button"
               className="inline-flex bg-green items-center justify-center p-2 rounded-md text-gray-800 hover:text-gray-900 focus:outline-none"
               onClick={toggleMenu}
-            > ICON
+            > 
+            <AiOutlineMenu />
             </button>
           </div>
         </div>

@@ -43,7 +43,7 @@ export async function getStaticProps({ params }) {
 
 const Product = ({ product }) => {
   return (
-    <div className="bg-light-metalic min-h-screen">
+    <div className="bg-light-metalic min-h-screen p-2">
       <div className="container mx-auto py-12">
         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="md:flex">

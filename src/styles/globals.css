@@ -8,7 +8,11 @@
   --background-end-rgb: 255, 255, 255;
 }
 body {
-  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+
+    background-color: #faf9ec;
+
+  
+
   font-weight: bold;
   
 }
