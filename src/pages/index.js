@@ -70,7 +70,7 @@ const Products = () => {
       <div className="container mx-auto py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {products.map(product => (
-            <a key={product.id} href={`/product/${product.id}`} className="border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 flex flex-col m-2 bg-gray-200">
+            <a key={product.id} href={`/product/${product.id}`} className="my-3 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 flex flex-col m-2 bg-gray-200">
   <div className="relative h-64">
     <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-t-lg" />
   </div>
