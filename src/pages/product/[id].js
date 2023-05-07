@@ -1,32 +1,5 @@
 import Link from 'next/link';
 
-const products = [
-  {
-    id: 1,
-    name: 'Example Product',
-    description:
-      'This is an example product. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. ',
-    price: 29.99,
-    image: '/product1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Example Product',
-    description:
-      'This is an example product. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. ',
-    price: 29.99,
-    image: '/product2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Example Product',
-    description:
-      'This is an example product. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. ',
-    price: 29.99,
-    image: '/product3.jpg',
-  },
-];
-
 export async function getStaticPaths() {
   const paths = products.map((product) => ({
     params: { id: product.id.toString() },
