@@ -1,48 +1,53 @@
-import React, { useEffect, useState } from 'react'
-
-import {db} from '../services/firebase'
-import { collection, getDocs } from '@firebase/firestore';
+import React, { useEffect, useState, memo } from 'react';
+import { db } from '../services/firebase';
+import { collection, getDocs, query, where } from '@firebase/firestore';
 
 const Products = () => {
+  const [produtos, setProdutos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
+  async function loadProdutos() {
+    let querySnapshot;
+    if (searchTerm) {
+      const q = query(collection(db, 'products'), where('tags', 'array-contains', searchTerm.toLowerCase()));
+      querySnapshot = await getDocs(q);
+    } else {
+      querySnapshot = await getDocs(collection(db, "products"));
+    }
+    setProdutos(querySnapshot.docs.map(doc => doc.data()));
+  }
 
-  const [produtos, setprodutos] = useState([])
-async function load_produtos() {
-  const querySnapshot = await getDocs(collection(db, "products"));
-  querySnapshot.forEach((doc) => {
-    setprodutos(produtos => [...produtos, doc.data()]);
-  });
-}
+  useEffect(() => {
+    loadProdutos();
+  }, [searchTerm]);
 
-useEffect(() => {
-  load_produtos()
-}, []);
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
-    <div className="bg-light-metalic">
-      <div className="container mx-auto py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {
-            produtos?.map(function (element = {}) {
-              return (
-                <div className='comment_box'>
-                  <a key={element.id} href={`/product/${element.id}`} className="my-3 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 flex flex-col m-2 bg-gray-200">
-                    <div className="relative h-64">
-                      <img src={element.image} alt={element.name} className="w-full h-full object-cover rounded-t-lg" />
-                    </div>
-                    <div className="p-4">
-                      <h2 className="font-bold text-xl mb-2">{element.name}</h2>
-                      <p className="text-gray-700 mb-4">{element.description}</p>
-                      <p className="font-bold text-xl">${element.price.toFixed(2)}</p>
-                    </div>
-                  </a>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center items-center">
+          <input type='text' className='border border-gray-300 rounded-md p-2 w-full md:w-1/2' placeholder='Search products...' value={searchTerm} onChange={handleSearch} />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+          {produtos?.map((element = {}) => (
+            <div key={element.id} className="bg-white shadow overflow-hidden rounded-lg">
+              <a href={`/product/${element.id}`}>
+                <img src={element.image} alt={element.name} className="w-full h-48 object-cover" />
+                <div className="px-4 py-2">
+                  <h2 className="text-lg font-semibold text-gray-900">{element.name}</h2>
+                  <p className="text-sm text-gray-500">{element.description}</p>
+                  <p className="mt-2 font-semibold text-gray-900">${element.price.toFixed(2)}</p>
                 </div>
-              )
-            })
-          }
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   )
-}
-export default Products
+};
+
+export default memo(Products);
