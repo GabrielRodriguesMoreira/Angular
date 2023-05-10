@@ -1,7 +1,10 @@
+const Product = () => {
+  const router = useRouter();
+  const { product } = router.query;
 
-const Product = ({ product }) => {
   return (
-    <h1>ola</h1>
+    <h1>id: {product}</h1>
   );
 };
+
 export default Product;
