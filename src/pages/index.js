@@ -25,35 +25,32 @@ const Products = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
   return (
-    <div className="bg-gray-100 min-h-screen py-8">
-      <WhatsAppButton className="fixed bottom-4 right-4 p-2 rounded-full bg-green-500 text-white cursor-pointer" />
-      <div className="container mx-auto px-4">
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={handleSearch}
-            className="w-full max-w-sm p-2 border border-gray-300 rounded-lg focus:outline-none"
-          />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {produtos?.map((element = {}) => (
-            <div key={element.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-              <a href={`/product/${element.id}`} className="block">
-                <img src={element.image} alt={element.name} className="w-full h-40 object-cover" />
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold mb-2">{element.name}</h2>
-                  <p className="text-gray-600 mb-2">{element.description}</p>
-                  <p className="font-semibold text-gray-800">${element.price.toFixed(2)}</p>
-                  <p className="text-gray-500">{element.id}</p>
-                </div>
-              </a>
-            </div>
-          ))}
-        </div>
+    <div className="flex flex-col items-center">
+      <WhatsAppButton className="px-3 py-3 fixed bottom-4 right-4 p-2 rounded-full bg-green-400 text-white cursor-pointer" />
+      <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mb-4 mt-6">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="w-full bg-white border border-gray-300 rounded-lg px-6 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        {produtos?.map((element = {}) => (
+          <div key={element.id} className="bg-white p-2 rounded-lg shadow-lg hover:shadow-xl transition duration-300 relative">
+            <a href={`/product/${element.id}`} className="hover:text-blue-400">
+              
+              <img src={element.image} alt={element.name} className="w-full mb-2 rounded-md" />
+              <div>
+                <h2 className="text-xl font-semibold mb-1">{element.name}</h2>
+                <p className="text-base text-gray-600 mb-2">{element.description}</p>
+              </div>
+              <p className="absolute bottom-0 right-0 bg-blue-400 text-white rounded-tr-none rounded-bl-none rounded-br-none rounded-md py-1 px-3 text-xl font-semibold">${element.price.toFixed(2)}</p>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -14,18 +14,18 @@ const Header = () => {
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/">
-              <nav className="text-gray-800 font-bold text-xl">My Website</nav>
+              <span className="text-gray-800 font-bold text-xl">My Website</span>
             </Link>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <Link href="/">
-              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Produtos</nav>
+              <span className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Produtos</span>
             </Link>
             <Link href="/About">
-              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Carrinho</nav>
+              <span className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Carrinho</span>
             </Link>
             <Link href="/contact">
-              <nav className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Contato</nav>
+              <span className="text-gray-800 hover:text-gray-400 px-4 py-2 rounded-md text-lg font-medium duration-200">Contato</span>
             </Link>
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
@@ -33,30 +33,31 @@ const Header = () => {
               type="button"
               className="inline-flex bg-green items-center justify-center p-2 rounded-md text-gray-800 hover:text-gray-900 focus:outline-none"
               onClick={toggleMenu}
-            > 
-            <AiOutlineMenu />
+            >
+              <spaniOutlineMenu />
             </button>
           </div>
         </div>
       </div>
-
+  
       {isOpen && (
         <div className="sm:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link href="/">
-              <nav className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</nav>
+              <span className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</span>
             </Link>
             <Link href="/about">
-              <nav className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">About</nav>
+              <span className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">About</span>
             </Link>
             <Link href="/contact">
-              <nav className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Contact</nav>
+              <span className="text-gray-800 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Contact</span>
             </Link>
           </div>
         </div>
       )}
     </nav>
   );
+  
 };
 
 export default Header;
