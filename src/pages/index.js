@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from 'react';
 import { db } from '../services/firebase';
-import WhatsAppButton from '../services/WhatsAppButton';
+
 import { collection, getDocs, query, where } from '@firebase/firestore';
 
 const Products = () => {
@@ -27,7 +27,7 @@ const Products = () => {
   };
   return (
     <div className="flex flex-col items-center">
-      <WhatsAppButton className="px-3 py-3 fixed bottom-4 right-4 p-2 rounded-full bg-green-400 text-white cursor-pointer" />
+     
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mb-4 mt-6">
         <input
           type="text"
