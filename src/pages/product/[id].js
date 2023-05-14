@@ -3,16 +3,18 @@ import { useRouter } from 'next/router';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase.js';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-
+import { useContext } from 'react';
+import { CartContext } from '../../services/CartContext';
 import ShareButton from '../../services/ShareButton';
 
-export default function Product() {
+export default function Product({ idi, name, price }) {
   const router = useRouter();
   const { id } = router.query;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const [amount, setAmount] = useState(1);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const getProductDetails = async () => {
@@ -42,17 +44,30 @@ export default function Product() {
     setMainImage(newImage);
   };
 
+
+  const handleAddToCart = (imagem, nome, preco, quantidade) => {
+    const product = {
+      img: imagem,
+      name: nome,
+      price: preco,
+      quantity: quantidade,
+    };
+
+    addToCart(product); 
+  };
+
+
   return (
     <div className="bg-gradient-to-b from-blue-400 to-transparent via-blue-400  min-h-screen">
 
       {product && (
         <div className="max-w-5xl mx-auto px-4 py-8 sm:pt-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2">
-            <div className="bg-white p-4 sm:mb-0 shadow-md rounded-lg mr-9">
-              <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+            <div className="bg-white p-4 sm:mb-0 shadow-md rounded-lg ">
+              <div className="flex justify-center ">
                 <img src={mainImage} alt={product.name} className="w-full h-auto rounded-lg" />
               </div>
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-4 ">
                 <div className="grid grid-cols-3 gap-5">
                   <img
                     src={product.image}
@@ -96,7 +111,7 @@ export default function Product() {
                 />
               </div>
               <div className="mb-4 flex">
-                <button className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4">
+                <button onClick={() => {handleAddToCart(product.image, product.name, product.price, document.getElementById("amount").value)}} className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4">
                   <span className="mx-auto">Add to cart</span> <BsFillCartPlusFill className="ml-2" />
                 </button>
                 <ShareButton url={currentUrl} />
