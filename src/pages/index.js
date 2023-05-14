@@ -26,7 +26,7 @@ const Products = () => {
     setSearchTerm(event.target.value);
   };
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mb-10">
      
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mb-4 mt-6">
         <input
@@ -39,7 +39,7 @@ const Products = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {produtos?.map((element = {}) => (
-          <div key={element.id} className="bg-white p-2 rounded-lg shadow-lg hover:shadow-xl transition duration-300 relative">
+          <div key={element.id} className="bg-white p-2 rounded-lg shadow-xl transition duration-300 relative">
             <a href={`/product/${element.id}`} className="hover:text-blue-400">
               
               <img src={element.image} alt={element.name} className="w-full mb-2 rounded-md" />

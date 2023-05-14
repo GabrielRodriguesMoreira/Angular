@@ -43,7 +43,8 @@ export default function Product() {
   };
 
   return (
-    <div className="bg-blue-400 min-h-screen">
+    <div className="bg-gradient-to-b from-blue-400 to-transparent via-blue-400  min-h-screen">
+
       {product && (
         <div className="max-w-5xl mx-auto px-4 py-8 sm:pt-10">
           <div className="grid grid-cols-1 sm:grid-cols-2">
@@ -95,7 +96,7 @@ export default function Product() {
                 />
               </div>
               <div className="mb-4 flex">
-                <button className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center">
+                <button className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4">
                   <span className="mx-auto">Add to cart</span> <BsFillCartPlusFill className="ml-2" />
                 </button>
                 <ShareButton url={currentUrl} />
