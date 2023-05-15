@@ -1,28 +1,20 @@
-  import React, { createContext, useState } from 'react';
+import React, { useState, createContext } from 'react';
 
-// Create the CartContext
 export const CartContext = createContext();
 
-// Define the initial cart items outside the component
-const initialCartItems = [];
-
-// Create the CartContextProvider component
 export const CartContextProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
 
-  // Add item to cart or update quantity
-  const addToCart = (product) => {
-    console.log(cartItems)
-    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (item) => {
+    setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  // Remove item from cart
-  const removeFromCart = (productId) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.filter((item) => item.id !== productId)
-    );
+  const removeFromCart = (item) => {
+    setCartItems((prevItems) => prevItems.filter((i) => i.id !== item.id));
   };
 
+  console.log(cartItems)
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
       {children}

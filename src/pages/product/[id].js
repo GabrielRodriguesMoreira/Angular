@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase.js';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { useContext } from 'react';
-import { CartContext } from '../../services/CartContext';
-import ShareButton from '../../services/ShareButton';
+import { CartContext } from '../../services/CartContext.js';
+import ShareButton from '../../services/ShareButton.js';
 
-export default function Product({ idi, name, price }) {
+
+export default function Product() {
   const router = useRouter();
   const { id } = router.query;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState('');
   const [amount, setAmount] = useState(1);
-  const { addToCart } = useContext(CartContext);
+
+  const { cartItems, removeFromCart, addToCart } = useContext(CartContext); // Access the cart context
+  console.log(cartItems)
+
 
   useEffect(() => {
     const getProductDetails = async () => {
@@ -32,31 +35,30 @@ export default function Product({ idi, name, price }) {
         console.error('Error retrieving product:', error);
       }
     };
+
     getProductDetails();
   }, [id]);
+
+  const handleImageChange = (newImage) => {
+    setMainImage(newImage);
+  };
 
   const handleAmountChange = (event) => {
     const newAmount = parseInt(event.target.value, 10);
     setAmount(newAmount);
   };
 
-  const handleImageChange = (newImage) => {
-    setMainImage(newImage);
-  };
-
-
-  const handleAddToCart = (imagem, nome, preco, quantidade) => {
+  const handleAddToCart = (image, name, price, quantity) => {
     const product = {
-      img: imagem,
-      name: nome,
-      price: preco,
-      quantity: quantidade,
+      id: Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111,
+      image,
+      name,
+      price,
+      quantity,
     };
-
-    addToCart(product); 
+    addToCart(product);
   };
-
-
+  
   return (
     <div className="bg-gradient-to-b from-blue-400 to-transparent via-blue-400  min-h-screen">
 
@@ -111,7 +113,7 @@ export default function Product({ idi, name, price }) {
                 />
               </div>
               <div className="mb-4 flex">
-                <button onClick={() => {handleAddToCart(product.image, product.name, product.price, document.getElementById("amount").value)}} className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4">
+                <button onClick={() => {handleAddToCart(product.image, product.name, product.price, amount)}} className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4">
                   <span className="mx-auto">Add to cart</span> <BsFillCartPlusFill className="ml-2" />
                 </button>
                 <ShareButton url={currentUrl} />

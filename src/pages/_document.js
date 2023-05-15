@@ -13,8 +13,6 @@ export default function Document() {
         <meta property="og:description" content="PAGE DESCRIPTION" />
       </Head>
       <body>
-        
-
         <Main />
         <NextScript />
       </body>
