@@ -3,7 +3,6 @@ import React from 'react';
 import { CartContextProvider } from '../services/CartContext';
 import Header from './Header';
 import Footer from './Footer';
-import Head from 'next/head';
 import WhatsAppButton from '../services/WhatsAppButton';
 
 export default function App({ Component, pageProps }) {

@@ -15,18 +15,18 @@ const Header = () => {
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/">
-              <span className="text-white font-bold text-xl">My Website</span>
+              <span className="text-white font-bold text-xl cursor-pointer">My Website</span>
             </Link>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <Link href="/">
-              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200">Products</span>
+              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Products</span>
             </Link>
             <Link href="/Cart">
-              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200">Cart</span>
+              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Cart</span>
             </Link>
             <Link href="/About">
-              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200">Contact</span>
+              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Contact</span>
             </Link>
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
@@ -40,18 +40,18 @@ const Header = () => {
           </div>
         </div>
       </div>
-  
+
       {isOpen && (
         <div className="sm:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link href="/">
-              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</span>
+              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Home</span>
             </Link>
             <Link href="/about">
-              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">About</span>
+              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">About</span>
             </Link>
             <Link href="/contact">
-              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Contact</span>
+              <span className="text-white hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Contact</span>
             </Link>
           </div>
         </div>
