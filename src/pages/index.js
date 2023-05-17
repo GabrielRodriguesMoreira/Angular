@@ -1,6 +1,8 @@
 import React, { useEffect, useState, memo } from 'react';
 import { db } from '../services/firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
+import Image from 'next/image';
+
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
@@ -18,7 +20,7 @@ const Products = () => {
       querySnapshot = await getDocs(collection(db, 'products'));
     }
     setProdutos(querySnapshot.docs.map((doc) => doc.data()));
-    setIsLoading(false); // Set loading state to false after data is fetched
+    setIsLoading(false); 
   }
 
   useEffect(() => {
@@ -31,6 +33,17 @@ const Products = () => {
 
   return (
     <div className="flex flex-col items-center mb-10">
+      <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
+        <Image
+          responsive 
+          width={1000} 
+          height={600} 
+          src="/featured.jpg"
+          alt="large highlighted image"
+          className="w-full h-auto" 
+        />
+      </div>
+
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mb-4 mt-6">
         <input
           type="text"
