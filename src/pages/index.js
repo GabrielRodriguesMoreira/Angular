@@ -31,15 +31,15 @@ const Products = () => {
 
   return (
     <div className="flex flex-col items-center mb-10">
-      <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
-        <Image
-          src="/featured.jpg"
-          alt="large highlighted image"
-          responsive
-          width={2000}
-          height={600}
-        />
-      </div>
+      <div style={{ width: '100%', height: '0', paddingBottom: '30%', position: 'relative' }}>
+      <Image
+        src="/featured.jpg"
+        alt="large highlighted image"
+        fill
+        cover
+        center
+      />
+    </div>
 
       <div className="w-full p-6 pl-20 pr-20">
         <input

@@ -95,16 +95,16 @@ export default function Product() {
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">{product.name}</h2>
             <p className="text-lg text-white mb-6">{product.description}</p>
-            <p className="text-xl text-white font-semibold mb-4">${product.price}</p>
+            <p className="text-3xl bg-white p-3 rounded-lg text-blue-400 font-bold mb-4 max-w-max ">${product.price}</p>
             <div className="mb-4">
-              <p className="text-lg text-white font-semibold mb-2">Specifications:</p>
-              <ul className="text-white">
+              <ul className="text-white text-lg">
                 <li className="mb-1">Material: 123</li>
                 <li className="mb-1">Size: 123</li>
                 <li className="mb-1">Color: 123</li>
                 <li className="mb-1">Weight: 123</li>
               </ul>
             </div>
+
             <div className="mb-4">
               <label htmlFor="amount" className="bg-white text-lg text-blue-400 font-semibold mb-2 mr-1 p-3 rounded-tl-lg rounded-bl-lg">
                 Amount:
