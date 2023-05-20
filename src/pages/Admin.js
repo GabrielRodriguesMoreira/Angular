@@ -73,52 +73,104 @@ export default function Admin() {
   };
 
   return (
-    <div>
-      <h1>Admin page</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">Admin page</h1>
       <form onSubmit={handleFormSubmit}>
-        <label>
-          Name:
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Name:</span>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <label>
-          Image:
-          <input type="text" name="image" value={formData.image} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Image:</span>
+          <input
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <label>
-          Price:
-          <input type="number" name="price" value={formData.price} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Price:</span>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <label>
-          Description:
-          <input type="text" name="description" value={formData.description} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Description:</span>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <label>
-          Tags:
-          <input type="text" name="tags" value={formData.tags} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Tags:</span>
+          <input
+            type="text"
+            name="tags"
+            value={formData.tags}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <label>
-          Image Slides:
-          <input type="text" name="slide_images" value={formData.slide_images} onChange={handleInputChange} required />
+        <label className="block mb-4">
+          <span className="text-lg font-semibold">Image Slides:</span>
+          <input
+            type="text"
+            name="slide_images"
+            value={formData.slide_images}
+            onChange={handleInputChange}
+            required
+            className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+          />
         </label>
-        <br />
-        <button type="submit">Create</button>
+        <button
+          type="submit"
+          className="px-6 py-2 rounded-md bg-blue-400 text-white font-semibold"
+        >
+          Create
+        </button>
       </form>
-      <ul>
+      <ul className="mt-8">
         {products.map((product) => (
-          <li key={product.id}>
-            <strong>ID:</strong> {product.id} <br />
-            <strong>Name:</strong> {product.name} <br />
-            <strong>Image:</strong> {product.image} <br />
-            <strong>Price:</strong> {product.price} <br />
-            <strong>Description:</strong> {product.description} <br />
-            <strong>Tags:</strong> {product.tags && product.tags.join(', ')} <br />
-            <strong>Image Slides:</strong> {product.slide_images && product.slide_images.join(', ')} <br />
-            <button onClick={() => handleDelete(product.id)}>Delete</button>
+          <li key={product.id} className="mb-6 border border-gray-300 p-4 rounded-lg flex items-center">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-32 h-auto rounded-md mr-4"
+            />
+            <div>
+              <strong className="text-lg font-semibold">ID:</strong> {product.id} <br />
+              <strong className="text-lg font-semibold">Name:</strong> {product.name} <br />
+              <strong className="text-lg font-semibold">Price:</strong> {product.price} <br />
+              <strong className="text-lg font-semibold">Description:</strong> {product.description} <br />
+              <strong className="text-lg font-semibold">Tags:</strong> {product.tags && product.tags.join(', ')} <br />
+              <strong className="text-lg font-semibold">Image Slides:</strong> {product.slide_images && product.slide_images.join(', ')} <br />
+              <button
+                onClick={() => handleDelete(product.id)}
+                className="px-4 py-2 rounded-md bg-red-500 text-white font-semibold mt-2"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
