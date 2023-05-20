@@ -5,13 +5,38 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { cartItemsState } from '../services/CartContext';
 
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const cartItems = useRecoilValue(cartItemsState);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const PASSWORD_KEY = process.env.NEXT_PUBLIC_PASSWORD_KEY;
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleAdminClick = () => {
+    setShowPasswordPrompt(true);
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+
+    if (password === PASSWORD_KEY) {
+
+      window.location.href = '/Admin';
+    } else {
+      // Invalid password, show error message
+      alert('Invalid password');
+    }
+
+    // Reset the password field
+    setPassword('');
+    // Close the password prompt
+    setShowPasswordPrompt(false);
   };
 
   return (
@@ -30,6 +55,12 @@ const Header = () => {
             <Link href="/About">
               <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Contact</span>
             </Link>
+            <button
+              className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer"
+              onClick={handleAdminClick}
+            >
+              Admin
+            </button>
             <Link href="/Cart">
               <span className="relative">
                 <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md sm:text-2xl font-medium duration-200 cursor-pointer">
@@ -62,6 +93,12 @@ const Header = () => {
                 )}
               </span>
             </Link>
+            <button
+              className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer"
+              onClick={handleAdminClick}
+            >
+              Admin
+            </button>
           </div>
         </div>
         {menuOpen && (
@@ -75,6 +112,27 @@ const Header = () => {
           </div>
         )}
       </div>
+      {showPasswordPrompt && (
+        <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-70 z-10">
+          <div className="bg-white p-8 rounded-md">
+            <h2 className="text-lg font-medium mb-4">Enter Admin Password</h2>
+            <form onSubmit={handlePasswordSubmit}>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border border-gray-300 px-4 py-2 rounded-md mb-4"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
