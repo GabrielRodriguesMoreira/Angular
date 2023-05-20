@@ -22,6 +22,5 @@ const db = getFirestore(app);
 // Try to add analytics
 const analytics =
   app.name && typeof window !== 'undefined' ? getAnalytics(app) : null;
-
 export { db, analytics };
 
