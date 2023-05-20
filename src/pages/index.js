@@ -3,6 +3,7 @@ import { db } from '../services/firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
@@ -24,17 +25,26 @@ const Products = () => {
 
   useEffect(() => {
     loadProdutos();
+    
   }, [searchTerm]);
+
+
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   return (
     <div className="flex flex-col items-center mb-10">
-      <div style={{ width: '100%', height: '0', paddingBottom: '30%', position: 'relative' }}>
-        <Image src="/featured.jpg" alt="large highlighted image" fill cover center />
-      </div>
+<div style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+      {isMobile ? (
+        <img src="/i.jpg" alt="mobile large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+      ) : (
+        <img src="/featured.jpg" alt="large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+      )}
+    </div>
 
       <div className="w-full p-6 pl-20 pr-20">
         <input

@@ -2,11 +2,11 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from '@firebase/firestore'
 
-const API_KEY = process.env.API_KEY;
-const API_ID = process.env.API_ID;
+
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD0VOHjarbUMCE11zJ4unGKCK0dH14Can0", 
+  apiKey: API_KEY, 
   authDomain: "global-road-383820.firebaseapp.com",
   projectId: "global-road-383820",
   storageBucket: "global-road-383820.appspot.com",
@@ -24,3 +24,4 @@ const analytics =
   app.name && typeof window !== 'undefined' ? getAnalytics(app) : null;
 
 export { db, analytics };
+
