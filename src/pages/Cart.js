@@ -1,9 +1,15 @@
-import { useContext } from 'react';
-import { CartContext } from '../services/CartContext'; // Import the cart context
+import { useRecoilValue, useSetRecoilState } from 'recoil'; 
+import { cartItemsState } from '../services/CartContext';
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useContext(CartContext); // Access the cart context
-  console.log(cartItems)
+  const cartItems = useRecoilValue(cartItemsState); 
+  const setCartItems = useSetRecoilState(cartItemsState); 
+  const removeFromCart = (itemId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
+
+  console.log(cartItems);
+
   return (
     <div>
       <h2>Cart</h2>

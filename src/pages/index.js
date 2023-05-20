@@ -1,7 +1,8 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../services/firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Products = () => {
   const [produtos, setProdutos] = useState([]);
@@ -32,14 +33,8 @@ const Products = () => {
   return (
     <div className="flex flex-col items-center mb-10">
       <div style={{ width: '100%', height: '0', paddingBottom: '30%', position: 'relative' }}>
-      <Image
-        src="/featured.jpg"
-        alt="large highlighted image"
-        fill
-        cover
-        center
-      />
-    </div>
+        <Image src="/featured.jpg" alt="large highlighted image" fill cover center />
+      </div>
 
       <div className="w-full p-6 pl-20 pr-20">
         <input
@@ -57,16 +52,20 @@ const Products = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
           </div>
         ) : (
-          produtos.map((element = {}) => (
+          produtos.map((element) => (
             <div key={element.id} className="bg-white p-2 rounded-lg shadow-xl transition duration-300 relative">
-              <a href={`/product/${element.id}`} className="hover:text-blue-400">
-                <img src={element.image} alt={element.name} className="w-full mb-2 rounded-md" />
-                <div>
-                  <h2 className="text-xl font-semibold mb-1">{element.name}</h2>
-                  <p className="text-base text-gray-600 mb-2">{element.description}</p>
-                </div>
-                <p className="absolute bottom-0 right-0 bg-blue-400 text-white rounded-tr-none rounded-bl-none rounded-br-none rounded-md py-1 px-3 text-xl font-semibold">${element.price.toFixed(2)}</p>
-              </a>
+              <Link href={`/product/${element.id}`} passHref>
+                <span className="hover:text-blue-400">
+                  <img src={element.image} alt={element.name} className="w-full mb-2 rounded-md" />
+                  <div>
+                    <h2 className="text-xl font-semibold mb-1">{element.name}</h2>
+                    <p className="text-base text-gray-600 mb-2">{element.description}</p>
+                  </div>
+                  <p className="absolute bottom-0 right-0 bg-blue-400 text-white rounded-tr-none rounded-bl-none rounded-br-none rounded-md py-1 px-3 text-xl font-semibold">
+                    ${element.price.toFixed(2)}
+                  </p>
+                </span>
+              </Link>
             </div>
           ))
         )}
@@ -75,4 +74,4 @@ const Products = () => {
   );
 };
 
-export default memo(Products);
+export default Products;
