@@ -48,13 +48,13 @@ export default function Product() {
     setAmount(newAmount);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (image, name, price, quantity) => {
     const product = {
       id: Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111,
-      image: product.image,
-      name: product.name,
-      price: product.price,
-      quantity: amount,
+      image: image,
+      name: name,
+      price: price,
+      quantity: quantity,
     };
     setCartItems((prevItems) => [...prevItems, product]);
   };
@@ -134,7 +134,7 @@ export default function Product() {
                 </div>
                 <div className="mb-4 flex">
                   <button
-                    onClick={handleAddToCart}
+                    onClick={()=>{ handleAddToCart(product.image,product.name,product.price,amount)}}
                     className="px-6 py-2 rounded-md bg-white text-blue-400 text-lg font-semibold inline-flex items-center mr-4"
                   >
                     <span className="mx-auto">Add to cart</span>{' '}
