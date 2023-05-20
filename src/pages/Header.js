@@ -1,43 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { cartItemsState } from '../services/CartContext';
 
-
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [password, setPassword] = useState('');
-  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const cartItems = useRecoilValue(cartItemsState);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const PASSWORD_KEY = process.env.NEXT_PUBLIC_PASSWORD_KEY;
+  const mobileMenuRef = useRef(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handleAdminClick = () => {
-    setShowPasswordPrompt(true);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
 
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
+    document.addEventListener('mousedown', handleClickOutside);
 
-    if (password === PASSWORD_KEY) {
-
-      window.location.href = '/Admin';
-    } else {
-      // Invalid password, show error message
-      alert('Invalid password');
-    }
-
-    // Reset the password field
-    setPassword('');
-    // Close the password prompt
-    setShowPasswordPrompt(false);
-  };
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-blue-400 shadow-lg">
@@ -55,12 +45,9 @@ const Header = () => {
             <Link href="/About">
               <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Contact</span>
             </Link>
-            <button
-              className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer"
-              onClick={handleAdminClick}
-            >
-              Admin
-            </button>
+            <Link href="/Admin">
+              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Admin</span>
+            </Link>
             <Link href="/Cart">
               <span className="relative">
                 <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md sm:text-2xl font-medium duration-200 cursor-pointer">
@@ -93,47 +80,28 @@ const Header = () => {
                 )}
               </span>
             </Link>
-
           </div>
         </div>
         {menuOpen && (
-          <div className="sm:hidden flex flex-col mt-2">
-            <Link href="/">
-              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Products</span>
-            </Link>
-            <Link href="/About">
-              <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Contact</span>
-            </Link>
-            <button
-              className="text-white hover:text-blue-200 p-0 m-0 rounded-md text-lg font-medium duration-200 cursor-pointer text-left"
-              onClick={handleAdminClick}
-            >
-              Admin
-            </button>
+          <div
+            ref={mobileMenuRef}
+            className="fixed right-0 top-0  bg-gradient-to-b from-blue-400 to-purple-500 h-screen w-40 z-50 shadow-lg border-l-2 border-white"
+          >
+            <div className="flex flex-col h-full py-6 px-4">
+              <Link href="/">
+                <span className="text-white hover:text-blue-200 py-2 rounded-md text-lg font-medium cursor-pointer">Products</span>
+              </Link>
+              <Link href="/About">
+                <span className="text-white hover:text-blue-200 py-2 rounded-md text-lg font-medium cursor-pointer">Contact</span>
+              </Link>
+              <Link href="/Admin">
+                <span className="text-white hover:text-blue-200 py-2 rounded-md text-lg font-medium cursor-pointer">Admin</span>
+              </Link>
+            </div>
+            
           </div>
         )}
       </div>
-      {showPasswordPrompt && (
-        <div className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-gray-900 bg-opacity-70 z-10">
-          <div className="bg-white p-8 rounded-md">
-            <h2 className="text-lg font-medium mb-4">Enter Admin Password</h2>
-            <form onSubmit={handlePasswordSubmit}>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border border-gray-300 px-4 py-2 rounded-md mb-4"
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };

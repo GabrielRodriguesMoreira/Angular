@@ -75,7 +75,7 @@ export default function Admin() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Admin page</h1>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="mb-8">
         <label className="block mb-4">
           <span className="text-lg font-semibold">Name:</span>
           <input
@@ -111,12 +111,12 @@ export default function Admin() {
         </label>
         <label className="block mb-4">
           <span className="text-lg font-semibold">Description:</span>
-          <input
-            type="text"
+          <textarea
             name="description"
             value={formData.description}
             onChange={handleInputChange}
             required
+            rows={4}
             className="block w-full border-gray-300 rounded-md mt-1 px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
           />
         </label>
@@ -149,13 +149,13 @@ export default function Admin() {
           Create
         </button>
       </form>
-      <ul className="mt-8">
+      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <li key={product.id} className="mb-6 border border-gray-300 p-4 rounded-lg flex items-center">
+          <li key={product.id} className="border border-gray-300 p-4 rounded-lg flex flex-col justify-between">
             <img
               src={product.image}
               alt={product.name}
-              className="w-32 h-auto rounded-md mr-4"
+              className="w-full h-auto rounded-md mb-4"
             />
             <div>
               <strong className="text-lg font-semibold">ID:</strong> {product.id} <br />
@@ -163,14 +163,14 @@ export default function Admin() {
               <strong className="text-lg font-semibold">Price:</strong> {product.price} <br />
               <strong className="text-lg font-semibold">Description:</strong> {product.description} <br />
               <strong className="text-lg font-semibold">Tags:</strong> {product.tags && product.tags.join(', ')} <br />
-              <strong className="text-lg font-semibold">Image Slides:</strong> {product.slide_images && product.slide_images.join(', ')} <br />
-              <button
-                onClick={() => handleDelete(product.id)}
-                className="px-4 py-2 rounded-md bg-red-500 text-white font-semibold mt-2"
-              >
-                Delete
-              </button>
+              
             </div>
+            <button
+              onClick={() => handleDelete(product.id)}
+              className="px-4 py-2 rounded-md bg-red-500 text-white font-semibold mt-2 self-start"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
