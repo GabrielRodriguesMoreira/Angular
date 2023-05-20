@@ -9,6 +9,7 @@ const Products = () => {
   const [produtos, setProdutos] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [mainImage, setMainImage] = useState("/featured.jpg")
 
   async function loadProdutos() {
     setIsLoading(true);
@@ -25,7 +26,12 @@ const Products = () => {
 
   useEffect(() => {
     loadProdutos();
-    
+
+
+    if (isMobile) {
+      setMainImage("/i.jpg")
+    }
+
   }, [searchTerm]);
 
 
@@ -36,16 +42,20 @@ const Products = () => {
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+
   return (
     <div className="flex flex-col items-center mb-10">
-<div style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
-      {isMobile ? (
-        <img src="/i.jpg" alt="mobile large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-      ) : (
-        <img src="/featured.jpg" alt="large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-      )}
-    </div>
+      
 
+ {isLoading ? (
+          <div className="flex items-center justify-center w-full h-48">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+          </div>
+        ) : (
+      <div style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <img src={mainImage} alt="mobile large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+      </div>
+        )}
       <div className="w-full p-6 pl-20 pr-20">
         <input
           type="text"

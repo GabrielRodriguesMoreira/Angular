@@ -93,12 +93,7 @@ const Header = () => {
                 )}
               </span>
             </Link>
-            <button
-              className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer"
-              onClick={handleAdminClick}
-            >
-              Admin
-            </button>
+
           </div>
         </div>
         {menuOpen && (
@@ -109,6 +104,12 @@ const Header = () => {
             <Link href="/About">
               <span className="text-white hover:text-blue-200 px-4 py-2 rounded-md text-lg font-medium duration-200 cursor-pointer">Contact</span>
             </Link>
+            <button
+              className="text-white hover:text-blue-200 p-0 m-0 rounded-md text-lg font-medium duration-200 cursor-pointer text-left"
+              onClick={handleAdminClick}
+            >
+              Admin
+            </button>
           </div>
         )}
       </div>
