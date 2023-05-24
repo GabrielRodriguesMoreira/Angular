@@ -53,13 +53,13 @@ const Products = () => {
           <img src={mainImage} alt="mobile large highlighted image" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
         </div>
       )}
-      <div className="w-full p-6 pl-20 pr-20">
+      <div className="w-full p-6 ">
         <input
           type="text"
           placeholder="Search products..."
           value={searchTerm}
           onChange={handleSearch}
-          className="w-full bg-white border border-gray-300 rounded-lg px-6 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-white border border-gray-300 rounded-lg px-8 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
       </div>
 

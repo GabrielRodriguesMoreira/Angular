@@ -1,15 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 body {
-    background-color: #faf9ec;
-  font-weight: bold;
+    background-color: #faf9f2;
+    font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
 }
 @keyframes pulse {
   0% {
